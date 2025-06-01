@@ -21,6 +21,7 @@
     "commander": "^9.4.0",
     "css-loader": "^6.10.0",
     "css-minimizer-webpack-plugin": "^6.0.0",
+    "dotenv": "^16.5.0",
     "file-loader": "^6.2.0",
     "glob": "^10.3.10",
     "javascript-obfuscator": "^4.1.0",
