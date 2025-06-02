@@ -11,6 +11,8 @@ const outputDir = path.resolve(process.cwd(), 'dist');
 
 const extensionsFilenames = {
   js: 'scripts',
+  ts: 'scripts',
+  tsx: 'scripts',
   scss: 'styles',
   less: 'styles',
   css: 'styles',
@@ -52,7 +54,8 @@ export default env => {
       ...getEntries('css', isProduction),
       // TODO: add html entries
       // TODO: add copy assets entries
-      // TODO: add TS entries
+      ...getEntries('ts', isProduction),
+      ...getEntries('tsx', isProduction),
       ...getGlobalAssetsEntry(),
     },
     output: {
@@ -74,8 +77,9 @@ export default env => {
     module: {
       rules: [
         {
-          test: /\.js$/,
-          use: ['babel-loader'],
+          test: /\.(js|ts|tsx)$/,
+          exclude: /node_modules/,
+          use: 'ts-loader'
         },
         {
           test: /\.less$/i,
@@ -102,5 +106,8 @@ export default env => {
         },
       ],
     },
+    resolve: {
+      extensions: ['.ts', '.tsx', '.js', '.json']
+    }
   };
 };
