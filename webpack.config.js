@@ -1,11 +1,13 @@
 /** @format */
 
 import path from 'path';
-import { glob } from 'glob';
+import {glob} from 'glob';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import WebpackObfuscatorPlugin from 'webpack-obfuscator';
 import RemoveEmptyScriptsPlugin from 'webpack-remove-empty-scripts';
+import webpack from 'webpack';
+import 'dotenv/config';
 
 const outputDir = path.resolve(process.cwd(), 'dist');
 
@@ -31,6 +33,7 @@ const getEntries = (extension, isProduction) => {
       entries[`${filename}.${folder}${minExtension}`] = files.map(str => './' + str);
     }
   });
+  console.log(entries)
   return entries;
 };
 
@@ -43,8 +46,8 @@ const getGlobalAssetsEntry = () => {
   return entries;
 };
 
-export default env => {
-  const isProduction = env.production === true;
+export default (env, argv) => {
+  const isProduction = argv.mode === 'production';
   return {
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? false : 'eval',
@@ -62,7 +65,19 @@ export default env => {
       path: outputDir,
       clean: true,
     },
-    plugins: [new MiniCssExtractPlugin(), new RemoveEmptyScriptsPlugin()],
+    plugins: [new MiniCssExtractPlugin(), new RemoveEmptyScriptsPlugin(),
+      new webpack.DefinePlugin({
+        'process.env.REACT_URL_API': JSON.stringify(isProduction ? process.env.REACT_URL_API_PROD : process.env.REACT_URL_API_DEV),
+        'process.env.REACT_URL_ORDER_FINISHED_API': JSON.stringify(isProduction ? process.env.REACT_URL_API_ORDER_FINISH_PROD : process.env.REACT_URL_API_ORDER_FINISH_DEV),
+        'process.env.REACT_URL_CART_RESERVATION_CHECK': JSON.stringify(isProduction ? process.env.REACT_URL_CART_RESERVATION_CHECK_PROD : process.env.REACT_URL_CART_RESERVATION_CHECK_DEV),
+        'process.env.REACT_URL_DETAIL_RESERVATION_CHECK': JSON.stringify(isProduction ? process.env.REACT_URL_DETAIL_RESERVATION_CHECK_PROD : process.env.REACT_URL_DETAIL_RESERVATION_CHECK_DEV),
+        'process.env.REACT_URL_RESERVED_TIMES': JSON.stringify(isProduction ? process.env.REACT_URL_RESERVED_TIMES_PROD : process.env.REACT_URL_RESERVED_TIMES_DEV),
+        'process.env.REACT_URL_RENTING_TIMES': JSON.stringify(isProduction ? process.env.REACT_URL_RENTING_TIMES_PROD : process.env.REACT_URL_RENTING_TIMES_DEV),
+        'process.env.REACT_URL_API_CHECK_ITEM_RESERVATION': JSON.stringify(isProduction ? process.env.REACT_URL_API_CHECK_ITEM_RESERVATION_PROD : process.env.REACT_URL_API_CHECK_ITEM_RESERVATION_DEV),
+        'process.env.REACT_URL_API_GET_SERVICE_SLOTS': JSON.stringify(isProduction ? process.env.REACT_URL_API_GET_SERVICE_SLOTS_PROD : process.env.REACT_URL_API_GET_SERVICE_SLOTS_DEV),
+        'process.env.REACT_DSN_SENTRY': JSON.stringify(process.env.SENTRY_DSN ?? '')
+      })
+    ],
     ...(isProduction && {
       optimization: {
         minimize: true,
@@ -77,7 +92,7 @@ export default env => {
     module: {
       rules: [
         {
-          test: /\.(js|ts|tsx)$/,
+          test: /\.(ts|tsx)$/,
           exclude: /node_modules/,
           use: 'ts-loader'
         },
@@ -90,7 +105,7 @@ export default env => {
           use: [
             MiniCssExtractPlugin.loader,
             'css-loader',
-            { loader: 'sass-loader', options: { sassOptions: { outputStyle: 'expanded' } } },
+            {loader: 'sass-loader', options: {sassOptions: {outputStyle: 'expanded'}}},
           ],
         },
         {
