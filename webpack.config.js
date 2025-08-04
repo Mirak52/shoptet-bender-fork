@@ -46,8 +46,8 @@ const getGlobalAssetsEntry = () => {
   return entries;
 };
 
-export default (env, argv) => {
-  const isProduction = argv.mode === 'production';
+export default env => {
+  const isProduction = env.production === true;
   return {
     mode: isProduction ? 'production' : 'development',
     devtool: isProduction ? false : 'eval',
