@@ -12,6 +12,7 @@ import 'dotenv/config';
 const outputDir = path.resolve(process.cwd(), 'dist');
 
 const extensionsFilenames = {
+  js: 'scripts',
   ts: 'scripts',
   tsx: 'scripts',
   scss: 'styles',
@@ -54,8 +55,10 @@ export default (env, argv) => {
       ...getEntries('js', isProduction),
       ...getEntries('{scss,less}', isProduction),
       ...getEntries('css', isProduction),
-      ...getEntries('ts', isProduction), //pravděpodobně blbost
-      ...getEntries('tsx', isProduction), //pravděpodobně blbost
+      // TODO: add html entries
+      // TODO: add copy assets entries
+      ...getEntries('ts', isProduction),
+      ...getEntries('tsx', isProduction),
       ...getGlobalAssetsEntry(),
     },
     output: {
