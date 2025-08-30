@@ -75,6 +75,7 @@ export default env => {
         'process.env.REACT_URL_RENTING_TIMES': JSON.stringify(isProduction ? process.env.REACT_URL_RENTING_TIMES_PROD : process.env.REACT_URL_RENTING_TIMES_DEV),
         'process.env.REACT_URL_API_CHECK_ITEM_RESERVATION': JSON.stringify(isProduction ? process.env.REACT_URL_API_CHECK_ITEM_RESERVATION_PROD : process.env.REACT_URL_API_CHECK_ITEM_RESERVATION_DEV),
         'process.env.REACT_URL_API_GET_SERVICE_SLOTS': JSON.stringify(isProduction ? process.env.REACT_URL_API_GET_SERVICE_SLOTS_PROD : process.env.REACT_URL_API_GET_SERVICE_SLOTS_DEV),
+        'process.env.REACT_URL_CHECK_ORDER_CONTENT': JSON.stringify(isProduction ? process.env.REACT_URL_CHECK_ORDER_CONTENT_PROD : process.env.REACT_URL_CHECK_ORDER_CONTENT_DEV),
         'process.env.REACT_DSN_SENTRY': JSON.stringify(process.env.SENTRY_DSN ?? '')
       })
     ],
