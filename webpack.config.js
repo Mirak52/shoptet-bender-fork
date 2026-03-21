@@ -77,6 +77,8 @@ export default env => {
         'process.env.REACT_URL_API_GET_SERVICE_SLOTS': JSON.stringify(isProduction ? process.env.REACT_URL_API_GET_SERVICE_SLOTS_PROD : process.env.REACT_URL_API_GET_SERVICE_SLOTS_DEV),
         'process.env.REACT_URL_CHECK_ORDER_CONTENT': JSON.stringify(isProduction ? process.env.REACT_URL_CHECK_ORDER_CONTENT_PROD : process.env.REACT_URL_CHECK_ORDER_CONTENT_DEV),
         'process.env.REACT_URL_ESHOP_RESERVATION_ITEMS': JSON.stringify(isProduction ? process.env.REACT_URL_ESHOP_RESERVATION_ITEMS_PROD : process.env.REACT_URL_ESHOP_RESERVATION_ITEMS_DEV),
+        'process.env.REACT_URL_VALIDATE_COUPON': JSON.stringify(isProduction ? process.env.REACT_URL_VALIDATE_COUPON_PROD : process.env.REACT_URL_VALIDATE_COUPON_DEV),                                
+        'process.env.REACT_URL_REDEEM_COUPON': JSON.stringify(isProduction ? process.env.REACT_URL_REDEEM_COUPON_PROD : process.env.REACT_URL_REDEEM_COUPON_DEV),                                             
         'process.env.REACT_DSN_SENTRY': JSON.stringify(process.env.SENTRY_DSN ?? '')
       })
     ],
