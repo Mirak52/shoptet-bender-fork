@@ -80,7 +80,13 @@ export default env => {
         'process.env.REACT_URL_VALIDATE_COUPON': JSON.stringify(isProduction ? process.env.REACT_URL_VALIDATE_COUPON_PROD : process.env.REACT_URL_VALIDATE_COUPON_DEV),                                
         'process.env.REACT_URL_REDEEM_COUPON': JSON.stringify(isProduction ? process.env.REACT_URL_REDEEM_COUPON_PROD : process.env.REACT_URL_REDEEM_COUPON_DEV),
         'process.env.REACT_URL_FRONTEND_CUSTOMIZATION': JSON.stringify(isProduction ? process.env.REACT_URL_FRONTEND_CUSTOMIZATION_PROD : process.env.REACT_URL_FRONTEND_CUSTOMIZATION_DEV),
-        'process.env.REACT_DSN_SENTRY': JSON.stringify(process.env.SENTRY_DSN ?? '')
+        'process.env.REACT_DSN_SENTRY': JSON.stringify(process.env.SENTRY_DSN ?? ''),
+        'process.env.REACT_URL_EVENT_SEATMAP': JSON.stringify(isProduction ? process.env.REACT_URL_EVENT_SEATMAP_PROD : process.env.REACT_URL_EVENT_SEATMAP_DEV),
+        'process.env.REACT_URL_EVENT_LOCK_SEATS': JSON.stringify(isProduction ? process.env.REACT_URL_EVENT_LOCK_SEATS_PROD : process.env.REACT_URL_EVENT_LOCK_SEATS_DEV),
+        'process.env.REACT_URL_EVENT_UNLOCK_SEATS': JSON.stringify(isProduction ? process.env.REACT_URL_EVENT_UNLOCK_SEATS_PROD : process.env.REACT_URL_EVENT_UNLOCK_SEATS_DEV),
+        'process.env.REACT_URL_EVENT_AVAILABILITY': JSON.stringify(isProduction ? process.env.REACT_URL_EVENT_AVAILABILITY_PROD : process.env.REACT_URL_EVENT_AVAILABILITY_DEV),
+        'process.env.REACT_URL_EVENT_OCCURRENCES': JSON.stringify(isProduction ? process.env.REACT_URL_EVENT_OCCURRENCES_PROD : process.env.REACT_URL_EVENT_OCCURRENCES_DEV)
+    
       })
     ],
     ...(isProduction && {
